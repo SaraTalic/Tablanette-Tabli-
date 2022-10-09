@@ -10,4 +10,9 @@ public class Karta {
 		this.vrijednost=v;
 	}
 
+	@Override
+	public String toString() {
+		return vrijednost+" "+znak;
+	}
+
 }

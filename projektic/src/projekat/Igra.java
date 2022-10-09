@@ -14,20 +14,24 @@ public class Igra {
 		this.igrac2=ig2;
 		
 		server.postaviKarteNaSto();
-		
-		
-		
+
 		//bice 8 krugova
 		for(int i=0;i<24;i++) {
+			
+			for(int j=0;j<server.naStolu.size();j++) {
+				ig1.pisi("Karte na stolu: "+server.naStolu.get(j));
+				ig2.pisi("Karte na stolu: "+server.naStolu.get(j));
+			}
 			
 			if(ig1.karteURuci.size()==0 && ig2.karteURuci.size()==0) {
 				server.podijeliKarte(ig1);
 				server.podijeliKarte(ig2);
+				
+				ig1.isipisiKarteURuci();
+				ig2.isipisiKarteURuci();
 			}
 			
-			for(int j=0;j<server.naStolu.size();j++) {
-				ig1.pisi("Karte na stolu: "+server.naStolu.get(j));
-			}
+			
 			
 			String odabrana="";
 			try {

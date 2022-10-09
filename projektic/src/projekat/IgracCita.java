@@ -13,18 +13,18 @@ public class IgracCita extends Thread{
 
 	public IgracCita(String ime,Socket sock) {
 		this.ime=ime;
-		this.socket=sock;
+		
 		
 		try {
 			
-			this.in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			
+			this.in=new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	@Override
 	public void run() {
 		while(true) {
 			try {

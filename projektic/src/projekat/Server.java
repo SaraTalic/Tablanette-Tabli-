@@ -7,11 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-
-
-
-
-
 public class Server {
 	
 	int port=Igrac.port;
@@ -45,14 +40,7 @@ public class Server {
 					igraci.get(1).pisi("Igra je Krenula.");
 					Igra ig=new Igra(this,igraci.get(0),igraci.get(1));
 				}
-				
-				
-				
-				
-			}
-			
-			
-			
+			}	
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -62,38 +50,26 @@ public class Server {
 	public static void promijesajKarte() {
 		
 		for(int i=1;i<15;i++) {
-			
+
 			if(i==11)
 				continue;
 			else {
-			
 			sveKarte.add(new Karta("herc",i));
 			sveKarte.add(new Karta("tref",i));
 			sveKarte.add(new Karta("pik",i));
 			sveKarte.add(new Karta("karo",i));
-			
 			}
-			
 		}
-		
 		Collections.shuffle(sveKarte);
 	}
 	
 	public static void postaviKarteNaSto() {
-		
-		
-		
-		for(int i=0;i<4;i++) {
-			
-		
-			
+	for(int i=0;i<4;i++) {
+
 			int broj=rand.nextInt(sveKarte.size());
 			naStolu.add(sveKarte.get(broj));
 			sveKarte.remove(broj);
-			
-			
 		}
-		
 	}
 	
 public static void podijeliKarte(ServerThread st) {

@@ -19,15 +19,15 @@ public class IgracPise extends Thread{
 		this.socket=sock;
 		
 		try {
-			this.out=new PrintWriter(new BufferedWriter(new OutputStreamWriter(sock.getOutputStream())));
-			
+			this.out=new PrintWriter(new BufferedWriter(new OutputStreamWriter(sock.getOutputStream())),true);
+			out.println(this.ime);
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	//u sustini bi trebalo da samo posaljem svoju kartu u svakom bacanju
-	
+/*	@Override
 	public void run() {
 		
 		try (Scanner scan=new Scanner(System.in)){
@@ -36,12 +36,12 @@ public class IgracPise extends Thread{
 				System.out.println("Koju kartu birate?");
 				String saljem=scan.nextLine();
 				out.println(saljem);
-				
 			}
-			
-			
 		}
-		
+	}*/
+	
+	public void posaljiPoruku(String poruka) {
+		out.println(poruka);
 	}
 	
 	

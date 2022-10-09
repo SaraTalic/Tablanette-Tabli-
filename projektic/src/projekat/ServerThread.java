@@ -17,8 +17,8 @@ public class ServerThread {
 	BufferedReader in;
 	PrintWriter out;
 	
-	public static ArrayList<Karta> karteURuci=new ArrayList<Karta>();
-	public static ArrayList<Karta> pokupljene=new ArrayList<Karta>();
+	public  ArrayList<Karta> karteURuci=new ArrayList<Karta>();
+	public  ArrayList<Karta> pokupljene=new ArrayList<Karta>();
 	
 	
 	ServerThread(Socket socket, Server server){
@@ -27,7 +27,9 @@ public class ServerThread {
 		
 		try {
 			this.in= new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-			this.out=new PrintWriter(new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream())));
+			this.out=new PrintWriter(new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream())),true);
+			this.ime=in.readLine();
+			
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -38,11 +40,9 @@ public class ServerThread {
 		this.out.println(poruka);
 	}
 	
-public static void kupljenje(Karta izabrana) {
+public  void kupljenje(Karta izabrana) {
 		
 		boolean pokupljeno=false;
-		
-		
 		 for (int i = 0; i < (1<<Server.naStolu.size()); i++){
 	            //System.out.print("{ ");
 	            ArrayList<Karta> podskupa=new ArrayList<Karta>();
@@ -84,5 +84,14 @@ public static void kupljenje(Karta izabrana) {
 		 }
 
 	}
+
+	public void isipisiKarteURuci() {
+		this.pisi("Vase karte: ");
+		String karte="";
+		for(Karta k:karteURuci)
+			karte+=k+"|";
+		this.pisi(karte);
+	}
+	
 	
 }
