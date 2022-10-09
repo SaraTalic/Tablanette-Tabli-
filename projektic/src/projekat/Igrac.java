@@ -26,7 +26,7 @@ public class Igrac {
 			ipise.start();
 			icita.start();
 			
-			
+			ipise.join();
 			icita.join();
 			
 		}catch(Exception e) {

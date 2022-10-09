@@ -40,29 +40,25 @@ public class ServerThread {
 		this.out.println(poruka);
 	}
 	
-public  void kupljenje(Karta izabrana) {
+	public void kupljenje(Karta izabrana) {
 		
 		boolean pokupljeno=false;
 		 for (int i = 0; i < (1<<Server.naStolu.size()); i++){
-	            //System.out.print("{ ");
+	          
 	            ArrayList<Karta> podskupa=new ArrayList<Karta>();
 	            int suma=0;
 	            pokupljeno=false;
 	            for (int j = 0; j < Server.naStolu.size(); j++) {
-	            	
 	                if ((i & (1 << j)) > 0) {
 	                	podskupa.add(Server.naStolu.get(j));
-	                   // System.out.print(Karte.naStolu.get(j).vrijednost + " ");
 	                 }
 	            }
-	          //  System.out.println("}");
 	            
+	            System.out.println(podskupa);
 	            for(Karta juhu: podskupa) {
 	            	suma+=juhu.vrijednost;
 	            	
-	            }
-	           // System.out.println("suma  "+suma);
-	            
+	            }	            
 	            if(suma==izabrana.vrijednost) {
 	            	for(Karta ka: podskupa) {
 	            		System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
@@ -73,24 +69,39 @@ public  void kupljenje(Karta izabrana) {
 	           }
 	      }
 		 
-		 //ako nemamo sta pokupiti, stavljamo kartu na sto
 		 if(!pokupljeno) {
 			 Server.naStolu.add(izabrana);
 			 karteURuci.remove(izabrana);
 		 }
-		 //inace ako smo pokupili samo dodamo i nasu kartu u pokupljene
 		 else {
 			 pokupljene.add(izabrana);
+			 karteURuci.remove(izabrana);
 		 }
+	}
 
+	public Karta vratiKartuIzRuke(String znak,int vrijednost) {
+		
+		for(Karta k :karteURuci)
+			if(k.vrijednost==vrijednost && k.znak.equals(znak))
+				return k;
+		return null;
+	}
+	
+	public void obrisiKartuIzRuke(String znak,int vrijednost) {
+		
+		for(Karta k :karteURuci)
+			if(k.vrijednost==vrijednost && k.znak.equals(znak))
+				karteURuci.remove(k);
 	}
 
 	public void isipisiKarteURuci() {
 		this.pisi("Vase karte: ");
+		this.pisi("---------------------------");
 		String karte="";
 		for(Karta k:karteURuci)
 			karte+=k+"|";
 		this.pisi(karte);
+		this.pisi("---------------------------");
 	}
 	
 	

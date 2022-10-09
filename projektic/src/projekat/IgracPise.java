@@ -27,18 +27,20 @@ public class IgracPise extends Thread{
 	}
 	
 	//u sustini bi trebalo da samo posaljem svoju kartu u svakom bacanju
-/*	@Override
+	@Override
 	public void run() {
 		
 		try (Scanner scan=new Scanner(System.in)){
 			
-			for(int i=0;i<24;i++) {
-				System.out.println("Koju kartu birate?");
+			while(true) {
 				String saljem=scan.nextLine();
+				if(saljem.equals("end"))
+					break;
 				out.println(saljem);
+				
 			}
 		}
-	}*/
+	}
 	
 	public void posaljiPoruku(String poruka) {
 		out.println(poruka);
