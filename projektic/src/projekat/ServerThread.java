@@ -41,13 +41,21 @@ public class ServerThread {
 	}
 	
 	public void kupljenje(Karta izabrana) {
-		
 		boolean pokupljeno=false;
+		/*for(Karta kk: Server.naStolu) {
+			if(kk.vrijednost==izabrana.vrijednost) {
+				pokupljene.add(kk);
+        		Server.naStolu.remove(kk);
+        		pokupljeno=true;
+			}
+		}*/
+		
+		
 		 for (int i = 0; i < (1<<Server.naStolu.size()); i++){
 	          
 	            ArrayList<Karta> podskupa=new ArrayList<Karta>();
 	            int suma=0;
-	            pokupljeno=false;
+	            //pokupljeno=false;
 	            for (int j = 0; j < Server.naStolu.size(); j++) {
 	                if ((i & (1 << j)) > 0) {
 	                	podskupa.add(Server.naStolu.get(j));
@@ -59,12 +67,14 @@ public class ServerThread {
 	            	suma+=juhu.vrijednost;
 	            	
 	            }	            
-	            if(suma==izabrana.vrijednost) {
+	            if(suma==izabrana.vrijednost ) {
 	            	for(Karta ka: podskupa) {
 	            		System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
 	            		pokupljene.add(ka);
 	            		Server.naStolu.remove(ka);
+	            		
 	            	}
+	            	karteURuci.remove(izabrana);
 	            	pokupljeno=true;
 	           }
 	      }
@@ -73,10 +83,10 @@ public class ServerThread {
 			 Server.naStolu.add(izabrana);
 			 karteURuci.remove(izabrana);
 		 }
-		 else {
-			 pokupljene.add(izabrana);
-			 karteURuci.remove(izabrana);
-		 }
+		// else {
+			// pokupljene.add(izabrana);
+			 //karteURuci.remove(izabrana);
+		 //}
 	}
 
 	public Karta vratiKartuIzRuke(String znak,int vrijednost) {
