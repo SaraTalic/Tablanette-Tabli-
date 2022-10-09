@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Random;
 
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 
 public class Karte {
 	
@@ -42,32 +43,27 @@ public class Karte {
 		}
 		
 		Collections.shuffle(sveKarte);
-		for(int i=0;i<sveKarte.size();i++) {
-
-			System.out.println("["+sveKarte.get(i).znak+", "+sveKarte.get(i).vrijednost+"]");
-		
-		}
-		postaviKarteNaSto();
-		
-		for(int i=0;i<naStolu.size();i++) {
-
-			System.out.println("sto["+naStolu.get(i).znak+", "+naStolu.get(i).vrijednost+"]");
-		
-		}
 	
 		
 	}
 	
-	public static void postaviKarteNaSto() {
+	public static ArrayList<Karta> postaviKarteNaSto() {
+		
+		ArrayList<Karta> kk=new ArrayList<Karta>();
 		
 		for(int i=0;i<4;i++) {
 			
+		
+			
 			int broj=rand.nextInt(sveKarte.size());
 			naStolu.add(sveKarte.get(broj));
+			kk.add(sveKarte.get(broj));
+					
 			sveKarte.remove(broj);
 			
 			
 		}
+		return kk;
 		
 	}
 	

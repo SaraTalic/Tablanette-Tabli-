@@ -5,7 +5,12 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class Igrac {
+import javax.swing.JFrame;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Igrac extends Application {
 	
 	String ime;
 	public static ArrayList<Karta> karteURuci=new ArrayList<Karta>();
@@ -34,7 +39,7 @@ public class Igrac {
 			IgracCita cita=new IgracCita(ime,sock);
 			
 			igra.start();
-			igra.start();
+			cita.start();
 			
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -102,5 +107,11 @@ public class Igrac {
 			 pokupljene.add(izabrana);
 		 }
 
+	}
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }
