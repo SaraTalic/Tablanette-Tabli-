@@ -24,9 +24,11 @@ public class Igra {
 			}
 			
 			if(ig1.karteURuci.size()==0 && ig2.karteURuci.size()==0) {
+				System.err.println("helo");
 				server.podijeliKarte(ig1);
 				server.podijeliKarte(ig2);	
 			}
+			
 			
 			ig1.isipisiKarteURuci();
 			ig2.isipisiKarteURuci();
@@ -71,5 +73,10 @@ public class Igra {
 			
 				
 		}
+		ig1.prebrojBodove();
+		ig1.pisi("Vas rezultat je: "+ig1.bodovi);
+		ig2.prebrojBodove();
+		ig2.pisi("Vas rezultat je: "+ig1.bodovi);
+
 	}
 }

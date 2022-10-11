@@ -17,8 +17,9 @@ public class ServerThread {
 	BufferedReader in;
 	PrintWriter out;
 	
-	public  ArrayList<Karta> karteURuci=new ArrayList<Karta>();
+	public ArrayList<Karta> karteURuci=new ArrayList<Karta>();
 	public  ArrayList<Karta> pokupljene=new ArrayList<Karta>();
+	public static int bodovi;
 	
 	
 	ServerThread(Socket socket, Server server){
@@ -41,14 +42,8 @@ public class ServerThread {
 	}
 	
 	public void kupljenje(Karta izabrana) {
+	
 		boolean pokupljeno=false;
-		/*for(Karta kk: Server.naStolu) {
-			if(kk.vrijednost==izabrana.vrijednost) {
-				pokupljene.add(kk);
-        		Server.naStolu.remove(kk);
-        		pokupljeno=true;
-			}
-		}*/
 		
 		
 		 for (int i = 0; i < (1<<Server.naStolu.size()); i++){
@@ -88,6 +83,34 @@ public class ServerThread {
 			 //karteURuci.remove(izabrana);
 		 //}
 	}
+	
+	//bez table
+	public void prebrojBodove() {
+		
+		for(Karta k: pokupljene) {
+			//2 mak 
+			if(k.znak.equals("tref") && k.vrijednost==2) {
+				bodovi+=2;
+			}
+			//10 i 10 karo
+			if(k.vrijednost==10) {
+				bodovi+=1;
+				if(k.znak.equals("karo"))
+					bodovi+=1;
+			}
+			//slike
+			if(k.vrijednost==12 || k.vrijednost==13 ||k.vrijednost==14) {
+				bodovi+=1;
+			}
+			//kec
+			if(k.vrijednost==1) {
+				bodovi+=1;
+			}
+			
+		}
+		if(pokupljene.size()>26)
+			bodovi+=3;
+	}
 
 	public Karta vratiKartuIzRuke(String znak,int vrijednost) {
 		
@@ -108,7 +131,7 @@ public class ServerThread {
 		this.pisi("Vase karte: ");
 		this.pisi("---------------------------");
 		String karte="";
-		for(Karta k:karteURuci)
+		for(Karta k:this.karteURuci)
 			karte+=k+"|";
 		this.pisi(karte);
 		this.pisi("---------------------------");
