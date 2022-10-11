@@ -64,7 +64,7 @@ public class Server {
 	}
 	
 	public static void postaviKarteNaSto() {
-	for(int i=0;i<4;i++) {
+		for(int i=0;i<4;i++) {
 
 			int broj=rand.nextInt(sveKarte.size());
 			naStolu.add(sveKarte.get(broj));
@@ -72,7 +72,7 @@ public class Server {
 		}
 	}
 	
-public static void podijeliKarte(ServerThread st) {
+    public static void podijeliKarte(ServerThread st) {
 		
 		for(int i=0;i<6;i++) {
 			int broj=rand.nextInt(sveKarte.size());
@@ -81,9 +81,9 @@ public static void podijeliKarte(ServerThread st) {
 		}
 	}
 
-public static void main(String[]args) {
-	Server s=new Server();
-}
+    public static void main(String[]args) {
+    	Server s=new Server();
+    }
 	
 
 }
