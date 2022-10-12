@@ -61,6 +61,10 @@ public class IgracCita extends Thread{
 	}
 	
 	public void dodajNaSto(String odg) {
+		if(odg.equals("")) {
+			System.err.println("Sto je prazan!");
+			return;
+		}
 		String niz1[]=odg.split("#");
 		
 		for(int i=0;i<niz1.length;i++) {

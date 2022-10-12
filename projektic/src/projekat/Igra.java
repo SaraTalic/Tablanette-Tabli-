@@ -51,7 +51,6 @@ public class Igra {
 			ig2.pisi(server.getNaStolu());
 			
 			
-			System.out.println("OPA");
 			String odabrana2="";
 			try {
 				ig2.pisi("Vi ste na potezu:");
@@ -65,12 +64,17 @@ public class Igra {
 			Karta k2 = new Karta(niz2[1], Integer.parseInt(niz2[0]));
 			ig2.kupljenje(k2);
 			
-			
-				
 		}
+		
+		
 		ig1.prebrojBodove();
-		ig1.pisi("Vas rezultat je: "+ig1.bodovi);
 		ig2.prebrojBodove();
+		
+		System.out.println(ig1.ime+" "+ig1.bodovi);
+		System.out.println(ig2.ime+" "+ig2.bodovi);
+
+		ig1.pisi("Vas rezultat je: "+ig1.bodovi);
+		
 		ig2.pisi("Vas rezultat je: "+ig1.bodovi);
 
 	}

@@ -19,7 +19,7 @@ public class ServerThread {
 	
 	
 	public  ArrayList<Karta> pokupljene=new ArrayList<Karta>();
-	public static int bodovi;
+	public int bodovi;
 	
 	
 	ServerThread(Socket socket, Server server){
@@ -80,10 +80,10 @@ public class ServerThread {
 			 Server.naStolu.add(izabrana);
 		//	 karteURuci.remove(izabrana);
 		 }
-		// else {
-			// pokupljene.add(izabrana);
+	 else {
+			 pokupljene.add(izabrana);
 			 //karteURuci.remove(izabrana);
-		 //}
+		 }
 	}
 	
 	//bez table
