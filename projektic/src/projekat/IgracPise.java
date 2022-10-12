@@ -7,18 +7,16 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class IgracPise extends Thread{
+public class IgracPise {
 	
 	private String ime;
 	private PrintWriter out;
 	private Socket socket;
-	Igrac igr;
 	
-	public IgracPise(Igrac i,String ime,Socket sock) {
-		
+	public IgracPise(String ime,Socket sock) {
 		this.ime=ime;
 		this.socket=sock;
-		this.igr=i;
+		
 		try {
 			this.out=new PrintWriter(new BufferedWriter(new OutputStreamWriter(sock.getOutputStream())),true);
 			out.println(this.ime);
@@ -28,24 +26,24 @@ public class IgracPise extends Thread{
 	}
 	
 	//u sustini bi trebalo da samo posaljem svoju kartu u svakom bacanju
-	@Override
+/*	@Override
 	public void run() {
 		
 		try (Scanner scan=new Scanner(System.in)){
 			
+			System.out.println("Unesite vase ime: ");
+			this.ime=scan.nextLine();
+			
 			while(true) {
 				String saljem=scan.nextLine();
-				int br=Integer.parseInt(saljem);
-				Karta k= this.igr.vratiKartuIzRuke(br);
-				this.igr.obrisiKartuIzRuke(br);
-				
 				if(saljem.equals("end"))
 					break;
-				out.println(k.toString());
+				out.println(saljem);
 				
 			}
 		}
 	}
+	*/
 	
 	public void posaljiPoruku(String poruka) {
 		out.println(poruka);

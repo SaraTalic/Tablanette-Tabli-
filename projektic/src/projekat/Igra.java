@@ -18,16 +18,21 @@ public class Igra {
 		//bice 8 krugova
 		for(int i=0;i<24;i++) {
 			
-			ig1.pisi(server.getNaStolu());
-			ig2.pisi(server.getNaStolu());
+		/*	for(int j=0;j<server.naStolu.size();j++) {
+				ig1.pisi("Karte na stolu: "+server.naStolu.get(j));
+				ig2.pisi("Karte na stolu: "+server.naStolu.get(j));
+			}
+			*/
 			
-			
-			if(i%6==0) {
-				System.err.println("Dijelim karte!");
+			if(ig1.karteURuci.size()==0 && ig2.karteURuci.size()==0) {
+				System.err.println("helo");
 				server.podijeliKarte(ig1);
 				server.podijeliKarte(ig2);	
 			}
 			
+			
+			ig1.isipisiKarteURuci();
+			ig2.isipisiKarteURuci();
 			
 			//Prvi igrac igra
 			
@@ -39,46 +44,40 @@ public class Igra {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(odabrana);
-			String niz[]=odabrana.split(" ");
-			Karta k = new Karta(niz[1], Integer.parseInt(niz[0]));
+			
+			String[] niz=odabrana.split(" ");
+			Karta k = ig1.vratiKartuIzRuke(niz[1],Integer.parseInt(niz[0]));
 			ig1.kupljenje(k);
 			
-			//-----------------------------
+			for(int j=0;j<server.naStolu.size();j++) {
+				ig1.pisi("Karte na stolu: "+server.naStolu.get(j));
+				ig2.pisi("Karte na stolu: "+server.naStolu.get(j));
+			}
+			
+			ig1.isipisiKarteURuci();
+			ig2.isipisiKarteURuci();
+			
 			//Drugi igrac igra
 			
-			ig1.pisi(server.getNaStolu());
-			ig2.pisi(server.getNaStolu());
-			
-			
-			String odabrana2="";
+			String odabrana1="";
 			try {
 				ig2.pisi("Vi ste na potezu:");
 				ig1.pisi("Protivnik je na potezu sacekajte.");
-				odabrana = ig2.in.readLine().trim();
+				odabrana1 = ig2.in.readLine().trim();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(odabrana);
-			String niz2[]=odabrana.split(" ");
-			Karta k2 = new Karta(niz2[1], Integer.parseInt(niz2[0]));
-			ig2.kupljenje(k2);
+			System.out.println(odabrana1);
+			String[] niz1=odabrana1.split(" ");
+			Karta k1 = ig2.vratiKartuIzRuke(niz1[1],Integer.parseInt(niz1[0]));
+			ig2.kupljenje(k1);
 			
+				
 		}
-		
-		
 		ig1.prebrojBodove();
-		ig2.prebrojBodove();
-		
-		System.out.println(ig1.ime+" "+ig1.bodovi);
-		System.out.println(ig2.ime+" "+ig2.bodovi);
-
 		ig1.pisi("Vas rezultat je: "+ig1.bodovi);
-		
+		ig2.prebrojBodove();
 		ig2.pisi("Vas rezultat je: "+ig1.bodovi);
 
 	}
-	
-	
-	
 }
