@@ -36,18 +36,9 @@ public class Server {
 				
 				if(igraci.size()==2) {
 					
-				igraci.get(0).pisi("pocinje");
-				igraci.get(1).pisi("pocinje");
-					//Igra ig=new Igra(this,igraci.get(0),igraci.get(1));
-				
-					podijeliKarte(igraci.get(0));
-					podijeliKarte(igraci.get(1));
-					
-					postaviKarteNaSto();
-					igraci.get(0).pisi(getNaStolu());
-					igraci.get(1).pisi(getNaStolu());
-				
-				
+					igraci.get(0).pisi("Igra je Krenula.");
+					igraci.get(1).pisi("Igra je Krenula.");
+					Igra ig=new Igra(this,igraci.get(0),igraci.get(1));
 				}
 			}	
 		}catch(IOException e) {
@@ -72,6 +63,13 @@ public class Server {
 		Collections.shuffle(sveKarte);
 	}
 	
+	public String getNaStolu() {
+		String rez="";
+		for(Karta k : naStolu)
+			rez+=k.toString()+"#";	
+		return rez;
+	}
+	
 	public static void postaviKarteNaSto() {
 		for(int i=0;i<4;i++) {
 
@@ -81,18 +79,11 @@ public class Server {
 		}
 	}
 	
-	public String getNaStolu() {
-		String rez="";
-		for(Karta k :naStolu)
-			rez+=k.vrijednost+" "+k.znak+"#";
-		return rez;
-	}
-	
     public static void podijeliKarte(ServerThread st) {
 		
 		for(int i=0;i<6;i++) {
 			int broj=rand.nextInt(sveKarte.size());
-			st.out.println(sveKarte.get(broj));
+			st.pisi(sveKarte.get(broj).toString());
 			sveKarte.remove(broj);
 		}
 	}

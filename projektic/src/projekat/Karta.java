@@ -2,8 +2,8 @@ package projekat;
 
 public class Karta {
 	
-	public String znak;
-	public int vrijednost;
+	String znak;
+	int vrijednost;
 	
 	Karta(String z, int v) {
 		this.znak=z;

@@ -5,85 +5,84 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-import application.Main;
-
 public class IgracCita extends Thread{
 	
-
+	private String ime;
+	private Socket socket;
 	private BufferedReader in;
-	Main igrac;
-	
-	public IgracCita(Main m,Socket sock) {
-
+	Igrac igr;
+	public IgracCita(Igrac i,String ime,Socket sock) {
+		this.ime=ime;
+		this.igr=i;
 		try {
 			
 			this.in=new BufferedReader(new InputStreamReader(sock.getInputStream()));
-			this.igrac=m;
+			
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public String procitaj() {
-		try {
-			return this.in.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	@Override
 	public void run() {
-		int i=0;
-		
-		
-		while(true) {
+		try {
+		System.out.println(this.in.readLine());
+		 
+		int br=0;
+			while(true) {
 			
-			try {
+				String odg1 = in.readLine();
+				this.igr.karteNaStolu.clear();
+				dodajNaSto(odg1);
 				
-				for(int b=0;b<6;b++) {
-					String odg=in.readLine().trim();
-					dodajUKarte(odg);
-					Thread.sleep(30);
+				igr.isipisiKarteSaStola();
+				
+				Thread.sleep(100);
+				if(br%12==0) {
+				for(int i=0;i<6;i++) {
+					String odg=in.readLine();
 					if(odg==null)
 						return;
+					dodajURuke(odg);
 				}
-				this.igrac.updateURuci();
-				
-				
-				for(int b=0;b<12;b++) {
-					String odg=in.readLine().trim();
-					dodajNaSto(odg);
-					
-					if(odg==null)
-						return;
 				}
-				this.igrac.updateNaStolu();
 				
-			}catch(Exception e) {
-				e.printStackTrace();
-				break;
-			}
-		i++;
+				igr.isipisiKarteURuci();				
+				System.out.println(in.readLine());
+				br++;
+				if(br==48)
+					break;
+				
+				}
+			System.out.println(in.readLine());
+			System.out.println(in.readLine());
+			System.out.println(in.readLine());
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
-	public void dodajUKarte(String odg) {
+	public void dodajNaSto(String odg) {
+		if(odg.equals("")) {
+			System.err.println("TABLA!");
+			return;
+		}
+		String niz1[]=odg.split("#");
+		
+		for(int i=0;i<niz1.length;i++) {
+			String niz[]=niz1[i].split(" ");
+			Karta k = new Karta(niz[1],Integer.parseInt(niz[0]));
+			igr.karteNaStolu.add(k);
+		}
+	}
+	
+	public void dodajURuke(String odg) {
 		
 		String niz[]=odg.split(" ");
 		Karta k = new Karta(niz[1],Integer.parseInt(niz[0]));
-		this.igrac.karteURuci.add(k);
-	}
-	public void dodajNaSto(String odg) {
+		igr.karteURuci.add(k);
 		
-		String niz[]=odg.split("#");
-		
-		for(int i =0;i<niz.length-1;i++) {
-			String niz1[]=niz[i].split(" ");
-			Karta k = new Karta(niz1[1],Integer.parseInt(niz1[0]));
-			this.igrac.karteNaStolu.add(k);
-		}
 	}
-	
 }

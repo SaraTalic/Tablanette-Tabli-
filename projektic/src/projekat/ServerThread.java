@@ -16,10 +16,8 @@ public class ServerThread {
 	Socket socket;
 	BufferedReader in;
 	PrintWriter out;
-	
-	public ArrayList<Karta> karteURuci=new ArrayList<Karta>();
 	public  ArrayList<Karta> pokupljene=new ArrayList<Karta>();
-	public static int bodovi;
+	public int bodovi;
 	
 	
 	ServerThread(Socket socket, Server server){
@@ -30,7 +28,7 @@ public class ServerThread {
 			this.in= new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			this.out=new PrintWriter(new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream())),true);
 			this.ime=in.readLine();
-			System.out.println(ime);
+			
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -41,16 +39,18 @@ public class ServerThread {
 		this.out.println(poruka);
 	}
 	
-	public void kupljenje(Karta izabrana) {
+	public boolean kupljenje(Karta izabrana) {
 	
 		boolean pokupljeno=false;
 		
+	
 		
 		 for (int i = 0; i < (1<<Server.naStolu.size()); i++){
 	          
 	            ArrayList<Karta> podskupa=new ArrayList<Karta>();
 	            int suma=0;
 	            //pokupljeno=false;
+	                       
 	            for (int j = 0; j < Server.naStolu.size(); j++) {
 	                if ((i & (1 << j)) > 0) {
 	                	podskupa.add(Server.naStolu.get(j));
@@ -69,19 +69,22 @@ public class ServerThread {
 	            		Server.naStolu.remove(ka);
 	            		
 	            	}
-	            	karteURuci.remove(izabrana);
+	         //   	karteURuci.remove(izabrana);
 	            	pokupljeno=true;
 	           }
 	      }
 		 
 		 if(!pokupljeno) {
 			 Server.naStolu.add(izabrana);
-			 karteURuci.remove(izabrana);
+		//	 karteURuci.remove(izabrana);
+			 return false;
 		 }
-		// else {
-			// pokupljene.add(izabrana);
+	 else {
+		 
+			 pokupljene.add(izabrana);
 			 //karteURuci.remove(izabrana);
-		 //}
+			 return true;
+		 }
 	}
 	
 	//bez table
@@ -90,7 +93,7 @@ public class ServerThread {
 		for(Karta k: pokupljene) {
 			//2 mak 
 			if(k.znak.equals("tref") && k.vrijednost==2) {
-				bodovi+=2;
+				bodovi+=1;
 			}
 			//10 i 10 karo
 			if(k.vrijednost==10) {
@@ -111,31 +114,7 @@ public class ServerThread {
 		if(pokupljene.size()>26)
 			bodovi+=3;
 	}
-
-	public Karta vratiKartuIzRuke(String znak,int vrijednost) {
-		
-		for(Karta k :karteURuci)
-			if(k.vrijednost==vrijednost && k.znak.equals(znak))
-				return k;
-		return null;
-	}
 	
-	public void obrisiKartuIzRuke(String znak,int vrijednost) {
-		
-		for(Karta k :karteURuci)
-			if(k.vrijednost==vrijednost && k.znak.equals(znak))
-				karteURuci.remove(k);
-	}
-
-	public void isipisiKarteURuci() {
-		this.pisi("Vase karte: ");
-		this.pisi("---------------------------");
-		String karte="";
-		for(Karta k:this.karteURuci)
-			karte+=k+"|";
-		this.pisi(karte);
-		this.pisi("---------------------------");
-	}
 	
 	
 }
