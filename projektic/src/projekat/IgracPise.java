@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class IgracPise extends Thread{
 	
 	private String ime;
-	private PrintWriter out;
+	public PrintWriter out;
 	private Socket socket;
 	Igrac igr;
 	
@@ -32,18 +32,17 @@ public class IgracPise extends Thread{
 	public void run() {
 		
 		try (Scanner scan=new Scanner(System.in)){
-			//int i=0;
+			int i=0;
 			while(true) {
 				String saljem="";
 				int br=0;
-				//ako se zezne posalje pogresan broj dobija sanse nove
+				
+			
 				while(true) {
 					saljem=scan.nextLine();
 					boolean isNumeric = saljem.chars().allMatch( Character::isDigit );
-					
-
 					if(!isNumeric) {
-						System.out.println("Nepravilan unos!");
+						System.out.println("Nepravilan unos! Unesite redni broj karte.");
 					}
 					else {
 						br=Integer.parseInt(saljem);
@@ -63,11 +62,10 @@ public class IgracPise extends Thread{
 					break;
 				out.println(k.toString());
 				
-			    //i++;
-				//if(i==24)
-				//	break;
+			    i++;
+				if(i==24)
+					break;
 			}
-			//this.out.close();
 		}
 	}
 	

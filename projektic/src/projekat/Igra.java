@@ -26,7 +26,6 @@ public class Igra {
 			
 			
 			if(i%6==0) {
-				System.err.println("Dijelim karte!");
 				server.podijeliKarte(ig1);
 				server.podijeliKarte(ig2);	
 			}
@@ -37,24 +36,15 @@ public class Igra {
 			String odabrana="";
 			try {
 				
-			
-			
-				  
 				ig1.pisi("Vi ste na potezu:");
 				ig2.pisi("Protivnik je na potezu sacekajte.");
 
-				
-				// System.out.println("vrijeme"+estimatedTime);
-				// if(estimatedTime>30) {
-				//	 odabrana=1+"";
-				 //}
-				 //else {
 				odabrana = ig1.in.readLine().trim();
-				// }
+			
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(odabrana);
+			
 			String niz[]=odabrana.split(" ");
 			Karta k = new Karta(niz[1], Integer.parseInt(niz[0]));
 			zadnjiIg1=ig1.kupljenje(k);
@@ -81,7 +71,7 @@ public class Igra {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(odabrana);
+			
 			String niz2[]=odabrana.split(" ");
 			Karta k2 = new Karta(niz2[1], Integer.parseInt(niz2[0]));
 			zadnjiIg2=ig2.kupljenje(k2);
@@ -91,8 +81,7 @@ public class Igra {
 				zadnjiIg1=false;
 			if(tablic)
 				ig2.bodovi+=1;
-			
-			System.out.println(zadnjiIg2);
+		
 		}
 		
 		
@@ -105,8 +94,6 @@ public class Igra {
 		ig1.prebrojBodove();
 		ig2.prebrojBodove();
 		
-		System.out.println(ig1.ime+" "+ig1.bodovi);
-		System.out.println(ig2.ime+" "+ig2.bodovi);
 	
 		ig1.pisi("REZULTAT:");
 		ig1.pisi("=========");
@@ -120,13 +107,6 @@ public class Igra {
 		ig2.pisi(ig1.ime+" : "+ig1.bodovi);
 		ig2.pisi("=========");
 		
-		for(int i=0;i<ig1.pokupljene.size();i++) {
-			System.out.println(ig1.pokupljene.get(i));
-		}
-		for(int i=0;i<ig2.pokupljene.size();i++) {
-			System.err.println(ig2.pokupljene.get(i));
-		}
-	
 		if(ig1.bodovi>ig2.bodovi) {
 			ig1.pisi("POBIJEDILI STE! Cestitamo.");
 			ig2.pisi("Izgubili ste. Vise srece drugi put!");

@@ -53,13 +53,16 @@ public class IgracCita extends Thread{
 				if(br==48)
 					break;
 				
-				}
+			}
+			
 			System.out.println(in.readLine());
 			System.out.println(in.readLine());
 			System.out.println(in.readLine());
 			System.out.println(in.readLine());
 			System.out.println(in.readLine());
 			System.out.println(in.readLine());
+			
+			this.igr.ipise.out.close();
 			this.in.close();
 			
 		}catch(Exception e) {

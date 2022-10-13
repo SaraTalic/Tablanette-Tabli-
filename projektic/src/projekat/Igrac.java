@@ -16,8 +16,8 @@ public class Igrac{
 	public ArrayList<Karta> karteURuci=new ArrayList<Karta>();
 	public ArrayList<Karta> karteNaStolu=new ArrayList<Karta>();
 	
-
-	
+	IgracCita icita;
+	IgracPise ipise;
 	
 	
 	public Igrac(String ime){
@@ -26,8 +26,8 @@ public class Igrac{
 	
 		try(Socket sock=new Socket("localhost",port)){
 	
-			IgracPise ipise=new IgracPise(this,ime,sock);
-			IgracCita icita=new IgracCita(this,ime,sock);
+			ipise=new IgracPise(this,ime,sock);
+			icita=new IgracCita(this,ime,sock);
 			
 			ipise.start();
 			icita.start();

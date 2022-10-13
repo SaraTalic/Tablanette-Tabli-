@@ -40,7 +40,9 @@ public class Server {
 					igraci.get(0).pisi("Igra je Krenula.");
 					igraci.get(1).pisi("Igra je Krenula.");
 					Igra ig=new Igra(this,igraci.get(0),igraci.get(1));
-					
+					sock.close();
+					System.err.println("Igra je zavrsena.");
+					break;
 				}
 			}	
 		}catch(IOException e) {
