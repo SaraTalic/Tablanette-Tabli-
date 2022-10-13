@@ -90,6 +90,14 @@ public class ServerThread {
 	            			}
 	            			pokupljeno=true;
 	            		}
+	            		/*else if(suma==izabrana.vrijednost) {
+	            			for(Karta ka: podskupa) {
+	            				//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
+	            				pokupljene.add(ka);
+	            				Server.naStolu.remove(ka);
+	            			}
+	            			pokupljeno=true;
+	            		}*/
 	            	}
 	            	
 	            	if(izabrana.vrijednost==14) {
@@ -112,13 +120,23 @@ public class ServerThread {
 	            				}
 	            				pokupljeno=true;
 	            			}
+	            			
 	            			else {
 	            				continue;
 	            			}
 	            		}
+	            		/*else if(suma==izabrana.vrijednost) {
+	            			for(Karta ka: podskupa) {
+	            				//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
+	            				pokupljene.add(ka);
+	            				Server.naStolu.remove(ka);
+	            			}
+	            			pokupljeno=true;
+	            		}*/
 	            	}
 	            
-	            	if(suma==izabrana.vrijednost ) {
+	            	
+	            	if(suma==izabrana.vrijednost) {
 	            		for(Karta ka: podskupa) {
 	            			//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
 	            			pokupljene.add(ka);

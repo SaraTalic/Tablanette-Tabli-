@@ -106,6 +106,13 @@ public class Igra {
 		ig2.pisi(ig2.ime+" : "+ig2.bodovi);
 		ig2.pisi(ig1.ime+" : "+ig1.bodovi);
 		ig1.pisi("=========");
+		
+		for(int i=0;i<ig1.pokupljene.size();i++) {
+			System.out.println(ig1.pokupljene.get(i));
+		}
+		for(int i=0;i<ig2.pokupljene.size();i++) {
+			System.err.println(ig2.pokupljene.get(i));
+		}
 	
 		if(ig1.bodovi>ig2.bodovi) {
 			ig1.pisi("POBIJEDILI STE! Cestitamo.");

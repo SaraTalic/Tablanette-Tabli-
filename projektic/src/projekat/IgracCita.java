@@ -59,6 +59,7 @@ public class IgracCita extends Thread{
 			System.out.println(in.readLine());
 			System.out.println(in.readLine());
 			System.out.println(in.readLine());
+			System.out.println(in.readLine());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
