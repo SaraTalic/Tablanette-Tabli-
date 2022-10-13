@@ -14,17 +14,21 @@ public class ServerThread {
 	String ime;
 	Server server;
 	Socket socket;
+	
 	BufferedReader in;
 	PrintWriter out;
+	
 	public  ArrayList<Karta> pokupljene=new ArrayList<Karta>();
 	public int bodovi;
 	
 	
 	ServerThread(Socket socket, Server server){
+		
 		this.server=server;
 		this.socket=socket;
 		
 		try {
+			
 			this.in= new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			this.out=new PrintWriter(new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream())),true);
 			this.ime=in.readLine();
@@ -34,55 +38,104 @@ public class ServerThread {
 		}
 		
 	}
+	
+
 
 	public void pisi(String poruka) {
 		this.out.println(poruka);
 	}
 	
+	
 	public boolean kupljenje(Karta izabrana) {
 	
 		boolean pokupljeno=false;
 		
-	
-		
-		 for (int i = 0; i < (1<<Server.naStolu.size()); i++){
+		for (int i = 0; i < (1<<Server.naStolu.size()); i++){
 	          
 	            ArrayList<Karta> podskupa=new ArrayList<Karta>();
 	            int suma=0;
-	            //pokupljeno=false;
-	                       
+	      
 	            for (int j = 0; j < Server.naStolu.size(); j++) {
 	                if ((i & (1 << j)) > 0) {
 	                	podskupa.add(Server.naStolu.get(j));
 	                 }
 	            }
 	            
-	            System.out.println(podskupa);
+	          //  System.out.println(podskupa);
 	            for(Karta juhu: podskupa) {
 	            	suma+=juhu.vrijednost;
 	            	
-	            }	            
-	            if(suma==izabrana.vrijednost ) {
-	            	for(Karta ka: podskupa) {
-	            		System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
-	            		pokupljene.add(ka);
-	            		Server.naStolu.remove(ka);
-	            		
+	            }	
+	            
+	            //As kupi vrijednosti 11 i 1
+	            if(izabrana.vrijednost==1) {
+	            	if(suma==izabrana.vrijednost || suma==11) {
+	            		for(Karta ka: podskupa) {
+		            		//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
+		            		pokupljene.add(ka);
+		            		Server.naStolu.remove(ka);
+		            	}
+	            		pokupljeno=true;
 	            	}
-	         //   	karteURuci.remove(izabrana);
-	            	pokupljeno=true;
-	           }
+	            }
+	            
+	            else {
+	            	
+	            	if(izabrana.vrijednost==13) {
+	            		if(suma==3 && podskupa.size()>1) {
+	            			for(Karta ka: podskupa) {
+	            				//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
+	            				pokupljene.add(ka);
+	            				Server.naStolu.remove(ka);
+	            			}
+	            			pokupljeno=true;
+	            		}
+	            	}
+	            	
+	            	if(izabrana.vrijednost==14) {
+	            		if(suma==4 && podskupa.size()>1) {
+	            			if(podskupa.get(0).vrijednost==1 && podskupa.get(1).vrijednost==3) {
+	            		
+	            				for(Karta ka: podskupa) {
+	            					//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
+	            					pokupljene.add(ka);
+	            					Server.naStolu.remove(ka);
+	            				}
+		         
+	            				pokupljeno=true;
+	            			}
+	            			else if(podskupa.get(0).vrijednost==3 && podskupa.get(1).vrijednost==1) {
+	            				for(Karta ka: podskupa) {
+	            					//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
+	            					pokupljene.add(ka);
+	            					Server.naStolu.remove(ka);
+	            				}
+	            				pokupljeno=true;
+	            			}
+	            			else {
+	            				continue;
+	            			}
+	            		}
+	            	}
+	            
+	            	if(suma==izabrana.vrijednost ) {
+	            		for(Karta ka: podskupa) {
+	            			//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
+	            			pokupljene.add(ka);
+	            			Server.naStolu.remove(ka);
+	            		}
+	        
+	            		pokupljeno=true;
+	            	}
+	            }
 	      }
 		 
 		 if(!pokupljeno) {
 			 Server.naStolu.add(izabrana);
-		//	 karteURuci.remove(izabrana);
 			 return false;
 		 }
-	 else {
-		 
+		 else {
 			 pokupljene.add(izabrana);
-			 //karteURuci.remove(izabrana);
 			 return true;
 		 }
 	}

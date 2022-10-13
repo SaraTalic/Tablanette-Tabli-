@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Igrac {
+
+
+public class Igrac{
 	
 	String ime;
 	public static int port=12345;
@@ -14,14 +16,18 @@ public class Igrac {
 	public ArrayList<Karta> karteURuci=new ArrayList<Karta>();
 	public ArrayList<Karta> karteNaStolu=new ArrayList<Karta>();
 	
+
+	
+	
+	
 	public Igrac(String ime){
 		
 		this.ime=ime;
-		
+	
 		try(Socket sock=new Socket("localhost",port)){
-			
-			IgracPise ipise=new IgracPise(this,this.ime,sock);
-			IgracCita icita=new IgracCita(this,this.ime,sock);
+	
+			IgracPise ipise=new IgracPise(this,ime,sock);
+			IgracCita icita=new IgracCita(this,ime,sock);
 			
 			ipise.start();
 			icita.start();
@@ -69,6 +75,8 @@ public class Igrac {
 		System.out.println("Unesite Vase ime:");
 		String ime=scan.nextLine();
 		Igrac ig=new Igrac(ime);
+		
+	
 		
 	}
 

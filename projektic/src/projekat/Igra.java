@@ -15,6 +15,7 @@ public class Igra {
 		this.igrac2=ig2;
 		
 		server.postaviKarteNaSto();
+		
 
 		//bice 8 krugova
 		for(int i=0;i<24;i++) {
@@ -94,24 +95,34 @@ public class Igra {
 		System.out.println(ig1.ime+" "+ig1.bodovi);
 		System.out.println(ig2.ime+" "+ig2.bodovi);
 	
-		ig1.pisi("Vasi bodovi: "+ig1.bodovi);
-		ig1.pisi("Bodovi protivnika: "+ig2.bodovi);
+		ig1.pisi("REZULTAT:");
+		ig1.pisi("=========");
+		ig1.pisi(ig1.ime+" : "+ig1.bodovi);
+		ig1.pisi(ig2.ime+" : "+ig2.bodovi);
+		ig1.pisi("=========");
 		
-		ig2.pisi("Vas rezultat je: "+ig2.bodovi);
-		ig2.pisi("Bodovi protivnika: "+ig1.bodovi);
+		ig2.pisi("REZULTAT:");
+		ig2.pisi("=========");
+		ig2.pisi(ig2.ime+" : "+ig2.bodovi);
+		ig2.pisi(ig1.ime+" : "+ig1.bodovi);
+		ig1.pisi("=========");
 	
 		if(ig1.bodovi>ig2.bodovi) {
-			ig1.pisi("POBJEDILI STE!");
-			ig2.pisi("IZGUBILI STE!");
+			ig1.pisi("POBIJEDILI STE! Cestitamo.");
+			ig2.pisi("Izgubili ste. Vise srece drugi put!");
+			
 		}
 		else if(ig1.bodovi<ig2.bodovi){
-			ig2.pisi("POBJEDILI STE!");
-			ig1.pisi("IZGUBILI STE!");
+			ig2.pisi("POBIJEDILI STE! Cestitamo.");
+			ig1.pisi("Izgubili ste. Vise srece drugi put!");
 		}
 		else {
 			ig1.pisi("IZJEDNACENO!");
 			ig2.pisi("IZJEDNACENO!");		
 		}
+		
+		
+		
 	}
 	
 	public boolean tablic() {

@@ -34,11 +34,13 @@ public class Server {
 				ServerThread igrac=new ServerThread(sock,this);
 				igraci.add(igrac);
 				
+				
 				if(igraci.size()==2) {
 					
 					igraci.get(0).pisi("Igra je Krenula.");
 					igraci.get(1).pisi("Igra je Krenula.");
 					Igra ig=new Igra(this,igraci.get(0),igraci.get(1));
+					
 				}
 			}	
 		}catch(IOException e) {
@@ -54,25 +56,28 @@ public class Server {
 			if(i==11)
 				continue;
 			else {
-			sveKarte.add(new Karta("herc",i));
-			sveKarte.add(new Karta("tref",i));
-			sveKarte.add(new Karta("pik",i));
-			sveKarte.add(new Karta("karo",i));
+				sveKarte.add(new Karta("herc",i));
+				sveKarte.add(new Karta("tref",i));
+				sveKarte.add(new Karta("pik",i));
+				sveKarte.add(new Karta("karo",i));
 			}
 		}
+		
 		Collections.shuffle(sveKarte);
 	}
 	
 	public String getNaStolu() {
+		
 		String rez="";
 		for(Karta k : naStolu)
 			rez+=k.toString()+"#";	
 		return rez;
+	
 	}
 	
 	public static void postaviKarteNaSto() {
+		
 		for(int i=0;i<4;i++) {
-
 			int broj=rand.nextInt(sveKarte.size());
 			naStolu.add(sveKarte.get(broj));
 			sveKarte.remove(broj);

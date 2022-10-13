@@ -34,8 +34,19 @@ public class IgracPise extends Thread{
 		try (Scanner scan=new Scanner(System.in)){
 			
 			while(true) {
-				String saljem=scan.nextLine();
-				int br=Integer.parseInt(saljem);
+				String saljem="";
+				int br=0;
+				//ako se zezne posalje pogresan broj dobija sanse nove
+				while(true) {
+					saljem=scan.nextLine();
+					br=Integer.parseInt(saljem);
+					if(br>0 && br<igr.karteURuci.size()+1) {
+						break;
+					}
+					else {
+						System.out.println("Nemate toliko karata u ruci.");
+					}
+				}
 				Karta k= this.igr.vratiKartuIzRuke(br);
 				this.igr.obrisiKartuIzRuke(br);
 				
