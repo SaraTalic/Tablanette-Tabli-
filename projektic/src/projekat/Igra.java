@@ -1,6 +1,7 @@
 package projekat;
 
 import java.io.IOException;
+import java.util.TimerTask;
 
 public class Igra {
 	
@@ -35,9 +36,21 @@ public class Igra {
 			
 			String odabrana="";
 			try {
+				
+			
+			
+				  
 				ig1.pisi("Vi ste na potezu:");
 				ig2.pisi("Protivnik je na potezu sacekajte.");
+
+				
+				// System.out.println("vrijeme"+estimatedTime);
+				// if(estimatedTime>30) {
+				//	 odabrana=1+"";
+				 //}
+				 //else {
 				odabrana = ig1.in.readLine().trim();
+				// }
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -105,7 +118,7 @@ public class Igra {
 		ig2.pisi("=========");
 		ig2.pisi(ig2.ime+" : "+ig2.bodovi);
 		ig2.pisi(ig1.ime+" : "+ig1.bodovi);
-		ig1.pisi("=========");
+		ig2.pisi("=========");
 		
 		for(int i=0;i<ig1.pokupljene.size();i++) {
 			System.out.println(ig1.pokupljene.get(i));
@@ -140,4 +153,5 @@ public class Igra {
 		for(Karta k :server.naStolu)
 			st.pokupljene.add(k);	
 	}
+	
 }

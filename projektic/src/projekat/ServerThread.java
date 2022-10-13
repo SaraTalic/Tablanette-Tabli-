@@ -82,7 +82,7 @@ public class ServerThread {
 	            else {
 	            	
 	            	if(izabrana.vrijednost==13) {
-	            		if(suma==3 && podskupa.size()>1) {
+	            		if((suma==3 && podskupa.size()>1) || suma==izabrana.vrijednost) {
 	            			for(Karta ka: podskupa) {
 	            				//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
 	            				pokupljene.add(ka);
@@ -90,17 +90,18 @@ public class ServerThread {
 	            			}
 	            			pokupljeno=true;
 	            		}
-	            		/*else if(suma==izabrana.vrijednost) {
-	            			for(Karta ka: podskupa) {
-	            				//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
-	            				pokupljene.add(ka);
-	            				Server.naStolu.remove(ka);
-	            			}
-	            			pokupljeno=true;
-	            		}*/
 	            	}
 	            	
-	            	if(izabrana.vrijednost==14) {
+	            	else if(izabrana.vrijednost==14) {
+	            		if(suma==izabrana.vrijednost) {
+		            		for(Karta ka: podskupa) {
+		            			//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
+		            			pokupljene.add(ka);
+		            			Server.naStolu.remove(ka);
+		            		}
+		        
+		            		pokupljeno=true;
+		            	}
 	            		if(suma==4 && podskupa.size()>1) {
 	            			if(podskupa.get(0).vrijednost==1 && podskupa.get(1).vrijednost==3) {
 	            		
@@ -125,17 +126,10 @@ public class ServerThread {
 	            				continue;
 	            			}
 	            		}
-	            		/*else if(suma==izabrana.vrijednost) {
-	            			for(Karta ka: podskupa) {
-	            				//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
-	            				pokupljene.add(ka);
-	            				Server.naStolu.remove(ka);
-	            			}
-	            			pokupljeno=true;
-	            		}*/
+	            		
 	            	}
 	            
-	            	
+	            	else {
 	            	if(suma==izabrana.vrijednost) {
 	            		for(Karta ka: podskupa) {
 	            			//System.out.println("odgovara "+ka.vrijednost+", "+ka.znak);
@@ -144,7 +138,7 @@ public class ServerThread {
 	            		}
 	        
 	            		pokupljeno=true;
-	            	}
+	            	}}
 	            }
 	      }
 		 
